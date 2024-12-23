@@ -1,12 +1,15 @@
 const express = require ("express");
 const app = express();
 const dotenv= require("dotenv").config()
+const connectDb=require("./config/connectDb")
 
 const PORT = process.env.PORT || 3000;
+connectDb();
 
-app.get("/", (req, res) => {
-    res.send("Hello World!");
-});
+app.use(express.json());
+
+
+app.use("/api/event", require ("./routes/event"))
 
 app.listen(PORT, (err)=>{
     console.log(`app is running on ${PORT}`);
