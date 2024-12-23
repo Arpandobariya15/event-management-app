@@ -36,7 +36,21 @@ const editEvent = async (req,res)=>{
     
 }
 
+// delete event
+const deleteEvent = async (req,res)=>{
+    try {
+		console.log('Delete route called');
+		// Use findByIdAndDelete instead of findByIdAndRemove
+		await Events.findByIdAndDelete(req.params.id);
+		console.log('Event deleted');
+		res.json({ message: 'Event deleted' });
+	} catch (error) {
+		console.error('Error deleting event:', error);
+		res.status(500).json({ message: error.message });
+	}
+}
+
+// update event
 
 
-
-module.exports={getEvents,addEvents,editEvent}
+module.exports={getEvents,addEvents,editEvent,deleteEvent}
